@@ -1,0 +1,105 @@
+ 
+ class StackFullException extends Exception {
+     
+    public StackFullException(){
+        super();
+    }
+    
+    public StackFullException(String message){
+        super(message);
+    }
+    
+}
+ 
+
+class StackEmptyException extends Exception {
+     
+    public StackEmptyException(){
+        super();
+    }
+    
+    public StackEmptyException(String message){
+        super(message);
+    }
+    
+}
+
+class Stack<T> {
+    private int size;
+    private T[] stackAr;
+    private int top; 
+ 
+   
+    @SuppressWarnings("unchecked")
+    public Stack(int size) {
+           this.size = size;
+           stackAr = (T[])new Object[size]; 
+           top = -1; 
+    }
+ 
+   
+    public void push(T value) throws StackFullException{
+           if(isFull()){
+                  throw new StackFullException("Cannot push "+value+", Stack is full");
+           }
+           stackAr[++top] = value;
+    }
+ 
+   
+    public T pop() {
+           if(isEmpty()){try
+           {
+                  throw new StackEmptyException("Stack is empty");
+           }
+           catch(StackEmptyException e)
+           {
+           System.out.println("Exception Caught "+e);
+           }
+           }
+           return stackAr[top--]; 
+    }
+ 
+  
+    public boolean isEmpty(){
+           return (top == -1);
+    }
+ 
+    
+    public boolean isFull(){
+           return (top == size - 1);
+    }
+ 
+}
+  
+
+public class tem {
+    public static void main(String[] args) {
+           Stack<Double> stack = new Stack<Double>(5); 
+           try{
+          
+           stack.push(11.77);
+           stack.push(21.99);
+           stack.push(31.66);
+           stack.push(41.33);
+           stack.push(51.55);
+         
+           
+           
+           System.out.print("Popped items: ");
+           System.out.print(stack.pop()+" ");
+           System.out.print(stack.pop()+" ");
+           System.out.print(stack.pop()+" ");
+           System.out.print(stack.pop()+" ");
+           System.out.print(stack.pop()+" ");
+           System.out.print(stack.pop()+" ");
+           
+           }
+           catch(Exception e)
+           {
+        	 System.out.println("Exception caught in main "+e);  
+           }
+           
+    }
+ 
+}
+ 
